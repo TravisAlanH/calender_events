@@ -1,0 +1,111 @@
+.CalDisplay {
+  width: 30rem;
+  height: auto;
+}
+
+.CalBox {
+  width: 15rem;
+  height: 25rem;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.EventItem {
+  width: 100%;
+  outline: 1px solid black;
+  max-height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+  transition: all 500ms ease-in-out;
+}
+.EventItem:not(.noActive):focus {
+  max-height: 30rem;
+}
+
+.EventType {
+  width: 10%;
+}
+
+.EventName {
+  width: 90%;
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items: center;
+  gap: .1rem;
+}
+
+.EventName {
+  padding-left: .4rem;
+}
+
+.EventText {
+  width: 13rem;
+}
+
+.EventTask {
+  width: 10rem;
+  overflow: hidden;
+}
+
+
+.Done {
+  height: 1.2rem;
+  width: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* float: right; */
+  /* font-size: 1.2rem; */
+
+  padding: .1rem;
+  /* font-size: large; */
+  /* background-color: rgb(111, 98, 98); */
+  /* border-radius: 50%; */
+}
+
+.CheckMark {
+  padding-left: .2rem;
+}
+
+.todoIcon {
+  font-size: 100%;
+}
+
+.trueText {
+  white-space: pre-wrap;
+}
+
+.EventContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.Dot {
+  margin: .3rem;
+  margin-top: .5rem;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.CalBoxDiv {
+  gap: 1rem;
+}
+
+.editBox {
+  background-color: rgb(138, 138, 138);
+  position: absolute;
+  z-index: 1;
+  transform: translateY(-5rem);
+}
+
