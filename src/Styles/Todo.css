@@ -3,9 +3,21 @@
   height: auto;
 }
 
+* {
+  /* border: 1px solid black; */
+}
+
+.overFlow {
+  transition: all 3s ease-in-out;
+}
+
+.overFlow:hover {
+  margin-left: -100%
+}
+
 .CalBox {
   width: 15rem;
-  height: 25rem;
+  /* min-height: 5rem; */
   border: 1px solid black;
   display: flex;
   flex-direction: column;

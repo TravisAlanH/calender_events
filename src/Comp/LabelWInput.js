@@ -2,14 +2,9 @@ import React from "react";
 
 export default function LabelWInput({ command, dataInput }) {
   return (
-    <div className="FlexRowCenterEnd">
+    <div className="flex flex-col items-start">
       <label>{command}</label>
-      <input
-        type="text"
-        id={command}
-        placeholder={command}
-        defaultValue={dataInput}
-      />
+      <input type="text" id={command} placeholder={command} defaultValue={dataInput} />
     </div>
   );
 }

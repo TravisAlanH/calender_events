@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 import LabelWInput from "./LabelWInput";
 import { add } from "date-fns";
-import { FaCog, FaRegCheckCircle, FaRegCircle, FaRegWindowClose } from "react-icons/fa";
+import testData from "../TestData";
+import { FaCog, FaRegCheckCircle, FaRegCircle, FaRegWindowClose, FaAngleLeft, FaAngleDoubleLeft, FaAngleRight, FaAngleDoubleRight, FaCalendar } from "react-icons/fa";
 
 export default function Todo() {
   const [adjustDate, setAdjustDate] = useState(0);
@@ -36,6 +37,7 @@ export default function Todo() {
 
   const NewEvent = ["Task", "Email"];
   let data = {};
+
   let event = JSON.parse(localStorage.getItem("TodoList")) || [];
 
   function AddTask(e) {
@@ -145,37 +147,79 @@ export default function Todo() {
 
   return (
     <div className="flex flex-col">
+      <div className="h-8 w-full bg-red-600 text-white text-sm flex flex-row justify-center items-center">
+        Uses Local Storage :{" "}
+        <button
+          className="mx-2 px-3 border border-black bg-black rounded"
+          onClick={() => {
+            localStorage.removeItem("TodoList");
+            setRerender(!rerender);
+          }}
+        >
+          Clear Local Storage
+        </button>
+        <button
+          className="mx-2 px-3 border border-black bg-black rounded"
+          onClick={() => {
+            localStorage.setItem("TodoList", JSON.stringify(testData));
+            setRerender(!rerender);
+          }}
+        >
+          Set Test Data
+        </button>
+      </div>
       <div className="flex flex-row justify-center items-center">
         <div className="CalDisplay flex flex-col justify-center items-center w-96">
           <div className="MonthText">{month[today.getMonth()]}</div>
-          <button
-            onClick={() => {
-              setAdjustDate(adjustDate - 1);
-            }}
-          >
-            Yesterday
-          </button>
-          <button
-            onClick={() => {
-              setAdjustDate(adjustDate + 1);
-            }}
-          >
-            Tomorrow
-          </button>
-          <button
-            onClick={() => {
-              setAdjustDate(0);
-            }}
-          >
-            Current
-          </button>
+          <div className="flex flex-row">
+            <button
+              className="mx-1 px-2"
+              onClick={() => {
+                setAdjustDate(adjustDate - 2);
+              }}
+            >
+              <FaAngleDoubleLeft />
+            </button>
+            <button
+              className="mx-1 px-2"
+              onClick={() => {
+                setAdjustDate(adjustDate - 1);
+              }}
+            >
+              <FaAngleLeft />
+            </button>
+            <button
+              className="mx-1 px-2"
+              onClick={() => {
+                setAdjustDate(0);
+              }}
+            >
+              <FaCalendar />
+            </button>
+            <button
+              className="mx-1 px-2"
+              onClick={() => {
+                setAdjustDate(adjustDate + 1);
+              }}
+            >
+              <FaAngleRight />
+            </button>
+            <button
+              className="mx-1 px-2"
+              onClick={() => {
+                setAdjustDate(adjustDate + 2);
+              }}
+            >
+              <FaAngleDoubleRight />
+            </button>
+          </div>
 
-          <div className="CalBoxDiv flex flex-row justify-center">
+          <div className="CalBoxDiv flex sm:flex-row flex-col justify-center">
             {DateArray.map((item, index) => {
               let color = true;
               let backgroundColor = "rgb(222, 225, 244)";
               return (
-                <div className="CalBox w-96" key={index}>
+                <div className="CalBox w-96 min-h-min" key={index}>
                   <div className="Header">
                     <div className="DayNumber">
                       {month[item.getMonth()]}
@@ -197,6 +241,21 @@ export default function Todo() {
                         checkBox = <FaRegCircle onClick={() => handleUnChecked(event.ID)} className="Done" />;
                       }
                       if (event.Date === formatDate(item.toISOString())) {
+                        let overflowText;
+                        if (event.Task.length > 16) {
+                          overflowText = (
+                            <h5 className="overFlow text-sm overflow-clip whitespace-nowrap" id="TaskString">
+                              {event.Task}
+                            </h5>
+                          );
+                        } else {
+                          overflowText = (
+                            <h5 className="text-sm overflow-clip whitespace-nowrap" id="TaskString">
+                              {event.Task}
+                            </h5>
+                          );
+                        }
+
                         return (
                           <div
                             key={index}
@@ -226,9 +285,7 @@ export default function Todo() {
                             </div>
                             <div className="EventContent">
                               <div className="EventName">
-                                <div className="EventTask">
-                                  <h5>{event.Task}</h5>
-                                </div>
+                                <div className="EventTask">{overflowText}</div>
                                 <div className="noActive">{checkBox}</div>
                                 <div className="noActive">
                                   <FaRegWindowClose className="Done" onClick={() => deleteItem(event.ID, event.Task)} />
@@ -286,16 +343,21 @@ export default function Todo() {
       </div>
       <div className="NewTaskFormDiv">
         <form onSubmit={AddTask}>
-          {NewEvent.map((item, index) => {
-            return <LabelWInput command={item} dataInput={""} key={index} />;
-          })}{" "}
-          <div className="FlexRowCenterEnd">
-            <label>Comment</label>
-            <textarea id={"Comment"} placeholder={"Comment"} rows="4" cols="25" />
+          <div className="flex flex-row justify-center">
+            {NewEvent.map((item, index) => {
+              return <LabelWInput command={item} dataInput={""} key={index} />;
+            })}{" "}
+            <div className="flex flex-col items-start">
+              <label>Comment</label>
+              <textarea id={"Comment"} placeholder={"Comment"} rows="3" cols="25" />
+            </div>
           </div>
-          <input type={"date"} id="Date" placeholder="DD-MMM-YYYY" defaultValue={formatDate(today.toISOString())} />
-          <input type={"color"} id="Color" />
-          <input type={"submit"} />
+
+          <div>
+            <input type={"date"} id="Date" placeholder="DD-MMM-YYYY" defaultValue={formatDate(today.toISOString())} />
+            <input type={"color"} id="Color" />
+            <input type={"submit"} />
+          </div>
         </form>
       </div>
     </div>
