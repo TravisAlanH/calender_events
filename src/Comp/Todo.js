@@ -147,7 +147,7 @@ export default function Todo() {
 
   return (
     <div className="flex flex-col">
-      <div className="h-8 w-full bg-red-600 text-white text-sm flex flex-row justify-center items-center">
+      <div className="sm:h-8 h-12 w-full bg-red-600 text-white text-sm flex flex-row justify-center items-center">
         Uses Local Storage :{" "}
         <button
           className="mx-2 px-3 border border-black bg-black rounded"
@@ -343,7 +343,7 @@ export default function Todo() {
       </div>
       <div className="NewTaskFormDiv">
         <form onSubmit={AddTask}>
-          <div className="flex flex-row justify-center">
+          <div className="flex sm:flex-row flex-col justify-center items-center">
             {NewEvent.map((item, index) => {
               return <LabelWInput command={item} dataInput={""} key={index} />;
             })}{" "}
