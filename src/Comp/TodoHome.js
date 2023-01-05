@@ -8,10 +8,10 @@ export const AdjustDate = createContext();
 
 export default function TodoHome() {
   const [adjustDate, setAdjustDate] = useState(0);
-  const [rerender, setRerender] = useState(false);
-  var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  //   const [rerender, setRerender] = useState(false);
+  //   var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-  var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  //   var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
   function formatDate(date) {
     var d = new Date(date),
@@ -28,14 +28,14 @@ export default function TodoHome() {
   let today = new Date();
   today = add(today, { days: adjustDate });
   const currentDate = add(today, { days: 0 });
-  const yesterday = add(today, { days: -1 });
-  const tomorrow = add(today, { days: 1 });
-  const yesterdayTwo = add(today, { days: -2 });
-  const tomorrowTwo = add(today, { days: 2 });
+  //   const yesterday = add(today, { days: -1 });
+  //   const tomorrow = add(today, { days: 1 });
+  //   const yesterdayTwo = add(today, { days: -2 });
+  //   const tomorrowTwo = add(today, { days: 2 });
 
-  let DateArray = [yesterdayTwo, yesterday, currentDate, tomorrow, tomorrowTwo];
+  //   let DateArray = [yesterdayTwo, yesterday, currentDate, tomorrow, tomorrowTwo];
 
-  let data = {};
+  //   let data = {};
 
   let event = JSON.parse(localStorage.getItem("TodoList")) || [];
 
@@ -47,7 +47,7 @@ export default function TodoHome() {
     <div>
       <AdjustDate.Provider value={{ adjustDate, setAdjustDate }}>
         <TopDate date={formatDate(currentDate)} />
-        <CalenderDay date={formatDate(yesterday)} events={event} />
+        <CalenderDay date={formatDate(currentDate)} events={event} />
         <NavBase />
       </AdjustDate.Provider>
     </div>
