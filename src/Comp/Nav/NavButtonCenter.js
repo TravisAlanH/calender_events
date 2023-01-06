@@ -9,9 +9,11 @@ export default function NavButtonCenter() {
       document.getElementById("AddTask").classList.add("bottom-0");
       document.getElementById("NavBarItems").classList.remove("gap-4");
       document.getElementById("NavBarItems").classList.add("gap-8");
+      document.getElementById("NavBar").classList.remove("h-16");
+      document.getElementById("NavBar").classList.add("h-12");
 
       document.querySelectorAll("[id=NavButtonGen]").forEach((element) => {
-        element.classList.remove("border-4");
+        // element.classList.remove("border-4");
         element.classList.remove("w-14");
         element.classList.remove("h-14");
         element.classList.add("w-8");
@@ -23,8 +25,10 @@ export default function NavButtonCenter() {
       document.getElementById("AddTask").classList.add("-bottom-56");
       document.getElementById("NavBarItems").classList.add("gap-4");
       document.getElementById("NavBarItems").classList.remove("gap-8");
+      document.getElementById("NavBar").classList.add("h-16");
+      document.getElementById("NavBar").classList.remove("h-12");
       document.querySelectorAll("[id=NavButtonGen]").forEach((element) => {
-        element.classList.add("border-4");
+        // element.classList.add("border-4");
         element.classList.remove("w-8");
         element.classList.remove("h-8");
         element.classList.add("w-14");

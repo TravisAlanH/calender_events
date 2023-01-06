@@ -8,6 +8,7 @@ export const AdjustDate = createContext();
 
 export default function TodoHome() {
   const [adjustDate, setAdjustDate] = useState(0);
+  //   const [currentDate, setCurrentDate] = useState(add(new Date(), { days: adjustDate }));
   //   const [rerender, setRerender] = useState(false);
   //   var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -39,16 +40,23 @@ export default function TodoHome() {
 
   let event = JSON.parse(localStorage.getItem("TodoList")) || [];
 
-  React.useEffect(() => {
-    console.log(adjustDate);
-  }, [adjustDate]);
+  //   let dailyEvent = [];
+
+  //   React.useEffect(() => {
+  //     event.map((item, index) => {
+  //       if (item.Date === formatDate(currentDate)) {
+  //         dailyEvent.push(item);
+  //       }
+  //       return null;
+  //     });
+  //   }, [currentDate, event]);
 
   return (
     <div>
       <AdjustDate.Provider value={{ adjustDate, setAdjustDate }}>
         <TopDate date={formatDate(currentDate)} />
         <CalenderDay date={formatDate(currentDate)} events={event} />
-        <NavBase />
+        <NavBase events={event} />
       </AdjustDate.Provider>
     </div>
   );
