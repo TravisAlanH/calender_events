@@ -3,7 +3,6 @@ import CalenderEventBlock from "./CalenderEventBlock";
 
 export default function CalenderHourBlock({ time, events, date }) {
   let dailyEvent = [];
-  let data;
 
   events.map((item, index) => {
     // console.log(time.substr(0, 2));
@@ -14,7 +13,6 @@ export default function CalenderHourBlock({ time, events, date }) {
     if (time.substr(0, 2) === item.Time.substr(0, 2) && date === item.Date) {
       dailyEvent.push(item);
       dailyEvent.sort((a, b) => a.Time.localeCompare(b.Time));
-      data = dailyEvent[0].Event;
     }
     return null;
   });
