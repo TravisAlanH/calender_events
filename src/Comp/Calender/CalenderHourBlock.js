@@ -27,8 +27,8 @@ export default function CalenderHourBlock({ time, events, date }) {
         <div className="h-6">{time}</div>
       </div>
       <div className="min-h-min w-full flex flex-col">
-        {dailyEvent.map((items, index) => {
-          return <CalenderEventBlock key={index} />;
+        {dailyEvent.map((item, index) => {
+          return <CalenderEventBlock {...item} key={index} />;
         })}
       </div>
     </div>
