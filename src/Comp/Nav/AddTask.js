@@ -33,7 +33,7 @@ export default function AddTask({ events }) {
     newData["ID"] = uuid();
     newData["Checked"] = false;
     newData["Dot"] = "block";
-    newData["Edit"] = "none";
+    newData["Edit"] = false;
     newData["CheckMark"] = "none";
     newData["Event"] = document.getElementById("AddNewEvent").value;
     newData["Email"] = document.getElementById("AddNewEmail").value;

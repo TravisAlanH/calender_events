@@ -17,8 +17,6 @@ export default function CalenderHourBlock({ time, events, date }) {
     return null;
   });
 
-  console.log(dailyEvent);
-
   // console.log(dailyEvent[0].Event || false);
 
   return (
@@ -28,7 +26,7 @@ export default function CalenderHourBlock({ time, events, date }) {
       </div>
       <div className="min-h-min w-full flex flex-col">
         {dailyEvent.map((item, index) => {
-          return <CalenderEventBlock {...item} key={index} />;
+          return <CalenderEventBlock data={item} key={index} />;
         })}
       </div>
     </div>

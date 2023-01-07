@@ -5,9 +5,11 @@ import CalenderDay from "./Calender/CalenderDay";
 import { add } from "date-fns";
 
 export const AdjustDate = createContext();
+export const EditData = createContext();
 
 export default function TodoHome() {
   const [adjustDate, setAdjustDate] = useState(0);
+  const [editData, setEditData] = useState({});
   //   const [currentDate, setCurrentDate] = useState(add(new Date(), { days: adjustDate }));
   //   const [rerender, setRerender] = useState(false);
   //   var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -54,9 +56,11 @@ export default function TodoHome() {
   return (
     <div>
       <AdjustDate.Provider value={{ adjustDate, setAdjustDate }}>
-        <TopDate date={formatDate(currentDate)} />
-        <CalenderDay date={formatDate(currentDate)} events={event} />
-        <NavBase events={event} />
+        <EditData.Provider value={{ editData, setEditData }}>
+          <TopDate date={formatDate(currentDate)} />
+          <CalenderDay date={formatDate(currentDate)} events={event} />
+          <NavBase events={event} dataInput={editData} />
+        </EditData.Provider>
       </AdjustDate.Provider>
     </div>
   );

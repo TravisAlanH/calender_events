@@ -1,5 +1,7 @@
 import React from "react";
 import AddTask from "./AddTask";
+import EditTask from "./EditTask";
+
 import NavButtonCenter from "./NavButtonCenter";
 import NavButtonViewGen from "./NavButtonViewGen";
 import NavButtonSubDay from "./NavButtonSubDay";
@@ -19,6 +21,7 @@ export default function NavBase({ events }) {
       </div>
       <div>
         <AddTask events={events} />
+        <EditTask events={events} />
       </div>
     </>
   );

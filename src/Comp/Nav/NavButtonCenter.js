@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function NavButtonCenter() {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   function ShowAddTask() {
     if (show === true) {
