@@ -7,21 +7,21 @@ import NavButtonViewGen from "./NavButtonViewGen";
 import NavButtonSubDay from "./NavButtonSubDay";
 import NavButtonAddDay from "./NavButtonAddDay";
 
-export default function NavBase({ events, dataInput, setEventData, setEditData }) {
+export default function NavBase({ events, editData, setEventData, setEditData }) {
   return (
     <>
-      <div id="NavBar" className="fixed bottom-0 w-full h-16 bg-red-500 rounded-t-3xl z-10 transition-all">
-        <div id="NavBarItems" className="fixed bottom-4 flex flex-row justify-center items-center w-full gap-4 z-10 transition-all">
-          <NavButtonViewGen />
+      <div id="NavBar" className="fixed bottom-0 w-full h-16 bg-slate-800 rounded-t-3xl z-10 transition-all">
+        <div id="NavBarItems" className="fixed bottom-2 flex flex-row justify-center items-center w-full gap-6 z-10 transition-all">
+          {/* <NavButtonViewGen /> */}
           <NavButtonSubDay />
           <NavButtonCenter />
           <NavButtonAddDay />
-          <NavButtonViewGen />
+          {/* <NavButtonViewGen /> */}
         </div>
       </div>
       <div>
         <AddTask events={events} />
-        <EditTask events={events} setEventData={setEventData} dataInput={dataInput} setEditData={setEditData} />
+        <EditTask events={events} setEventData={setEventData} editData={editData} setEditData={setEditData} />
       </div>
     </>
   );

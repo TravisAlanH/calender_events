@@ -3,9 +3,9 @@ import NavBase from "./Nav/NavBase";
 import TopDate from "./TopDate/TopDate";
 import CalenderDay from "./Calender/CalenderDay";
 import { add } from "date-fns";
+// import BaseData from "./EventBaseData";
 
 export const AdjustDate = createContext();
-export const EditData = createContext();
 
 export default function TodoHome() {
   const [adjustDate, setAdjustDate] = useState(0);
@@ -59,11 +59,11 @@ export default function TodoHome() {
   return (
     <div>
       <AdjustDate.Provider value={{ adjustDate, setAdjustDate }}>
-        <EditData.Provider value={{ editData, setEditData }}>
-          <TopDate date={formatDate(currentDate)} />
-          <CalenderDay date={formatDate(currentDate)} events={eventData} />
-          <NavBase events={eventData} setEventData={setEventData} dataInput={editData} setEditData={setEditData} />
-        </EditData.Provider>
+        {/* <EditData.Provider value={{ editData, setEditData }}> */}
+        <TopDate date={formatDate(currentDate)} />
+        <CalenderDay date={formatDate(currentDate)} events={eventData} setEventData={setEventData} setEditData={setEditData} />
+        <NavBase events={eventData} setEventData={setEventData} editData={editData} setEditData={setEditData} />
+        {/* </EditData.Provider> */}
       </AdjustDate.Provider>
     </div>
   );

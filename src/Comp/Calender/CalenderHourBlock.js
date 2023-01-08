@@ -3,7 +3,7 @@ import CalenderEventBlock from "./CalenderEventBlock";
 
 export const render = createContext();
 
-export default function CalenderHourBlock({ time, events, date, force, update }) {
+export default function CalenderHourBlock({ time, events, date, force, update, setEventData, setEditData }) {
   let dailyEvent = [];
 
   events = JSON.parse(localStorage.getItem("TodoList")) || [];
@@ -17,13 +17,13 @@ export default function CalenderHourBlock({ time, events, date, force, update })
   });
 
   return (
-    <div className="max-w-full h-auto m-2 bg-orange-500">
+    <div className="max-w-full h-auto m-2 bg-red-800 bg-opacity-30">
       <div className="flex flex-row w-full border-b-2 border-black">
         <div className="h-6">{time}</div>
       </div>
       <div className="min-h-min w-full flex flex-col">
         {dailyEvent.map((item, index) => {
-          return <CalenderEventBlock data={item} key={index} events={events} force={force} update={update} />;
+          return <CalenderEventBlock data={item} key={index} events={events} force={force} update={update} setEventData={setEventData} setEditData={setEditData} />;
         })}
       </div>
     </div>

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { EditData } from "../TodoHome";
+import { FaCheckSquare, FaWindowClose, FaCog } from "react-icons/fa";
+// import { EditData } from "../TodoHome";
 // import { Data } from "../TodoHome";
 
-export default function CalenderEventBlock({ data, events, force, update }) {
+export default function CalenderEventBlock({ data, events, force, update, setEventData, setEditData }) {
   const [view, setView] = useState(false);
   const [rerender, setRerender] = useState(false);
 
@@ -28,49 +29,44 @@ export default function CalenderEventBlock({ data, events, force, update }) {
     });
     localStorage.setItem("TodoList", JSON.stringify(events));
     setRerender(!rerender);
+    setEventData(events);
     update(!force);
-    // window.location.reload();
   }
 
   return (
-    <div id={idView} className="flex flex-row w-full my-1 h-11 transition-all">
-      <div className="w-12 border-2 border-black flex flex-row justify-center items-start py-2">
+    <div id={idView} className="flex flex-row w-full my-1 h-11 transition-all border-b-2 border-black  bg-red-800 bg-opacity-90">
+      <div className="w-12 flex flex-row justify-center items-start py-2">
         <div style={{ backgroundColor: data.Color }} className="w-6 h-6 rounded-full"></div>
       </div>
       <div className="flex flex-row w-full">
-        <div id="EventName" className="w-full h-full  border-2 border-black overflow-hidden" onClick={() => ViewInfo()}>
-          <div className="flex flex-col justify-start items-start px-2">
-            <div className="text-xs">{data.Time}</div>
-            <div className="">{data.Event}</div>
+        <div id="EventName" className="w-full h-full  overflow-hidden" onClick={() => ViewInfo()}>
+          <div className="flex flex-row justify-start items-center px-2 h-10">
+            <div className="text-white pr-4">{data.Time}</div>
+            <div className="text-white uppercase font-bold">{data.Event}</div>
           </div>
           <div className="">asdf</div>
         </div>
-        <div id="EventEdit" className="h-full flex flex-row justify-center items-start border-2 border-black">
-          <button>M</button>
+        <div id="EventEdit" className="h-full flex flex-row justify-center items-start pt-3 text-white text-xl">
+          <button className="px-1">
+            <FaCheckSquare />
+          </button>
           <button
+            className="px-1"
             onClick={() => {
               deleteItem(data.ID, data.Event);
             }}
           >
-            D
+            <FaWindowClose />
           </button>
-          <EditData.Consumer>
-            {({ editData, setEditData }) => {
-              function sendData() {
-                setEditData(data);
-              }
-              return (
-                <button
-                  onClick={() => {
-                    sendData();
-                    document.getElementById("EditEvent").classList.replace("-bottom-56", "bottom-0");
-                  }}
-                >
-                  E
-                </button>
-              );
+          <button
+            className="px-1"
+            onClick={() => {
+              document.getElementById("EditEvent").classList.replace("-bottom-48", "bottom-0");
+              setEditData(data);
             }}
-          </EditData.Consumer>
+          >
+            <FaCog />
+          </button>
         </div>
       </div>
     </div>

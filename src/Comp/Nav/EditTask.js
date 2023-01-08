@@ -1,39 +1,42 @@
 import React, { useState } from "react";
 import TextInputWithLabel from "../Inputs/TextInputWithLabel";
+import { FaWindowClose } from "react-icons/fa";
 
-export default function EditTask({ dataInput, events, setEventData, setEditData }) {
+export default function EditTask({ editData, events, setEventData, setEditData }) {
   const [reRender, setReRender] = useState(false);
 
   let data = [
     {
       "Name": "Event",
       "ElementID": "EditNewEvent",
-      "DefaultValue": dataInput.Event,
+      "DefaultValue": editData.Event,
       "PlaceHolder": "Event Name",
       "Required": true,
     },
     {
       "Name": "Email",
       "ElementID": "EditNewEmail",
-      "DefaultValue": dataInput.Email,
+      "DefaultValue": editData.Email,
       "PlaceHolder": "Email Address",
       "Required": false,
     },
     {
       "Name": "Comment",
       "ElementID": "EditNewComment",
-      "DefaultValue": dataInput.Comment,
+      "DefaultValue": editData.Comment,
       "PlaceHolder": "Additional Info",
       "Required": false,
     },
   ];
+  console.log(editData);
+  console.log(editData.Color);
 
   // TodoList
   function EditEvent(e) {
     e.preventDefault();
     events.map((item) => {
-      if (item.ID === dataInput.ID) {
-        item["ID"] = dataInput.ID;
+      if (item.ID === editData.ID) {
+        item["ID"] = editData.ID;
         item["Checked"] = false;
         item["Dot"] = "block";
         item["Edit"] = false;
@@ -51,23 +54,30 @@ export default function EditTask({ dataInput, events, setEventData, setEditData 
       setEventData(events);
       setReRender(!reRender);
 
-      document.getElementById("EditEvent").classList.replace("bottom-0", "-bottom-56");
+      document.getElementById("EditEvent").classList.replace("bottom-0", "-bottom-48");
 
       return null;
     });
   }
   return (
-    <div id="EditEvent" className="fixed -bottom-56 w-full bg-cyan-900 h-72 flex flex-row justify-center items-start -z-10 rounded-t-3xl transition-all">
-      <form onSubmit={EditEvent} className="flex flex-col gap-2 my-4">
+    <div id="EditEvent" className="fixed -bottom-48 w-full bg-cyan-900 h-72 flex flex-col justify-start items-center -z-20 rounded-t-3xl transition-all">
+      <div
+        className="w-full flex flex-row justify-end mr-12 mt-4 mb-2 text-white"
+        onClick={() => {
+          document.getElementById("EditEvent").classList.replace("bottom-0", "-bottom-48");
+        }}
+      >
+        <FaWindowClose />
+      </div>
+      <form onSubmit={EditEvent} className="flex flex-col gap-2 mb-4 pr-6">
         {data.map((item, index) => {
           return <TextInputWithLabel {...item} key={index} />;
         })}
-        <div className="flex flex-row justify-center items-center">
-          <input className="mx-2" type={"date"} defaultValue={dataInput.Date} id="EditNewDate" />
-          <input className="mx-2" type={"time"} defaultValue={dataInput.Time} id="EditNewTime" />
-          <input className="mx-2" type={"color"} id="EditNewColor" defaultValue={dataInput.Color} />
+        <div className="flex flex-row justify-center items-center translate-x-4">
+          <input className="mx-2" type={"date"} defaultValue={editData.Date} id="EditNewDate" />
+          <input className="mx-2" type={"time"} defaultValue={editData.Time} id="EditNewTime" />
         </div>
-        <input className="mx-2 text-white font-bold" type={"submit"} />
+        <input className="mx-2 text-white font-bold translate-x-4" type={"submit"} />
       </form>
     </div>
   );
