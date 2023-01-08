@@ -3,7 +3,7 @@ import AddTask from "./AddTask";
 import EditTask from "./EditTask";
 
 import NavButtonCenter from "./NavButtonCenter";
-import NavButtonViewGen from "./NavButtonViewGen";
+// import NavButtonViewGen from "./NavButtonViewGen";
 import NavButtonSubDay from "./NavButtonSubDay";
 import NavButtonAddDay from "./NavButtonAddDay";
 
