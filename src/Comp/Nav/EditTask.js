@@ -1,10 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import TextInputWithLabel from "../Inputs/TextInputWithLabel";
-import { EditData } from "../TodoHome";
 
 export default function EditTask({ dataInput, events, setEventData, setEditData }) {
   const [reRender, setReRender] = useState(false);
-  const EditDataContext = useContext(EditData);
 
   let data = [
     {
@@ -31,7 +29,6 @@ export default function EditTask({ dataInput, events, setEventData, setEditData 
   ];
 
   // TodoList
-  // let newData = {};
   function EditEvent(e) {
     e.preventDefault();
     events.map((item) => {
@@ -49,13 +46,6 @@ export default function EditTask({ dataInput, events, setEventData, setEditData 
         item["Color"] = document.getElementById("EditNewColor").value;
 
         setEditData(item);
-
-        // EditDataContext(item);
-        // <EditData.Consumer>
-        //   {({ editData, setEditData }) => {
-        //     setEditData(item);
-        //   }}
-        // </EditData.Consumer>;
       }
       localStorage.setItem("TodoList", JSON.stringify(events));
       setEventData(events);
