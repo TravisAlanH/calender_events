@@ -1,23 +1,20 @@
-import React from "react";
+import React, { createContext } from "react";
 import CalenderEventBlock from "./CalenderEventBlock";
 
-export default function CalenderHourBlock({ time, events, date }) {
+export const render = createContext();
+
+export default function CalenderHourBlock({ time, events, date, force, update }) {
   let dailyEvent = [];
 
-  events.map((item, index) => {
-    // console.log(time.substr(0, 2));
-    // console.log(item.Time.substr(0, 2));
-    // console.log(date);
-    // console.log(item.Date);
+  events = JSON.parse(localStorage.getItem("TodoList")) || [];
 
+  events.map((item, index) => {
     if (time.substr(0, 2) === item.Time.substr(0, 2) && date === item.Date) {
       dailyEvent.push(item);
       dailyEvent.sort((a, b) => a.Time.localeCompare(b.Time));
     }
     return null;
   });
-
-  // console.log(dailyEvent[0].Event || false);
 
   return (
     <div className="max-w-full h-auto m-2 bg-orange-500">
@@ -26,7 +23,7 @@ export default function CalenderHourBlock({ time, events, date }) {
       </div>
       <div className="min-h-min w-full flex flex-col">
         {dailyEvent.map((item, index) => {
-          return <CalenderEventBlock data={item} key={index} />;
+          return <CalenderEventBlock data={item} key={index} events={events} force={force} update={update} />;
         })}
       </div>
     </div>

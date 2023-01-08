@@ -10,6 +10,8 @@ export const EditData = createContext();
 export default function TodoHome() {
   const [adjustDate, setAdjustDate] = useState(0);
   const [editData, setEditData] = useState({});
+  const [eventData, setEventData] = useState(JSON.parse(localStorage.getItem("TodoList")) || []);
+  // let eventData = JSON.parse(localStorage.getItem("TodoList")) || [];
   //   const [currentDate, setCurrentDate] = useState(add(new Date(), { days: adjustDate }));
   //   const [rerender, setRerender] = useState(false);
   //   var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -31,6 +33,7 @@ export default function TodoHome() {
   let today = new Date();
   today = add(today, { days: adjustDate });
   const currentDate = add(today, { days: 0 });
+
   //   const yesterday = add(today, { days: -1 });
   //   const tomorrow = add(today, { days: 1 });
   //   const yesterdayTwo = add(today, { days: -2 });
@@ -40,7 +43,7 @@ export default function TodoHome() {
 
   //   let data = {};
 
-  let event = JSON.parse(localStorage.getItem("TodoList")) || [];
+  // let event = JSON.parse(localStorage.getItem("TodoList")) || [];
 
   //   let dailyEvent = [];
 
@@ -58,8 +61,8 @@ export default function TodoHome() {
       <AdjustDate.Provider value={{ adjustDate, setAdjustDate }}>
         <EditData.Provider value={{ editData, setEditData }}>
           <TopDate date={formatDate(currentDate)} />
-          <CalenderDay date={formatDate(currentDate)} events={event} />
-          <NavBase events={event} dataInput={editData} />
+          <CalenderDay date={formatDate(currentDate)} events={eventData} />
+          <NavBase events={eventData} setEventData={setEventData} dataInput={editData} setEditData={setEditData} />
         </EditData.Provider>
       </AdjustDate.Provider>
     </div>

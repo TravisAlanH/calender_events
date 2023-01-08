@@ -7,7 +7,7 @@ import NavButtonViewGen from "./NavButtonViewGen";
 import NavButtonSubDay from "./NavButtonSubDay";
 import NavButtonAddDay from "./NavButtonAddDay";
 
-export default function NavBase({ events }) {
+export default function NavBase({ events, dataInput, setEventData, setEditData }) {
   return (
     <>
       <div id="NavBar" className="fixed bottom-0 w-full h-16 bg-red-500 rounded-t-3xl z-10 transition-all">
@@ -21,7 +21,7 @@ export default function NavBase({ events }) {
       </div>
       <div>
         <AddTask events={events} />
-        <EditTask events={events} />
+        <EditTask events={events} setEventData={setEventData} dataInput={dataInput} setEditData={setEditData} />
       </div>
     </>
   );

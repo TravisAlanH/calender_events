@@ -1,48 +1,70 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import TextInputWithLabel from "../Inputs/TextInputWithLabel";
+import { EditData } from "../TodoHome";
 
-export default function EditTask({ dataInput, events }) {
+export default function EditTask({ dataInput, events, setEventData, setEditData }) {
+  const [reRender, setReRender] = useState(false);
+  const EditDataContext = useContext(EditData);
+
   let data = [
     {
       "Name": "Event",
       "ElementID": "EditNewEvent",
-      "DefaultValue": "",
+      "DefaultValue": dataInput.Event,
       "PlaceHolder": "Event Name",
       "Required": true,
     },
     {
       "Name": "Email",
       "ElementID": "EditNewEmail",
-      "DefaultValue": "",
+      "DefaultValue": dataInput.Email,
       "PlaceHolder": "Email Address",
       "Required": false,
     },
     {
       "Name": "Comment",
       "ElementID": "EditNewComment",
-      "DefaultValue": "",
+      "DefaultValue": dataInput.Comment,
       "PlaceHolder": "Additional Info",
       "Required": false,
     },
   ];
 
   // TodoList
-  //   let newData = {};
-  function EditEvent() {
-    // newData["ID"] = dataInput.ID;
-    // newData["Checked"] = false;
-    // newData["Dot"] = "block";
-    // newData["Edit"] = false;
-    // newData["CheckMark"] = "none";
-    // newData["Event"] = document.getElementById("EditNewEvent").value;
-    // newData["Email"] = document.getElementById("EditNewEmail").value;
-    // newData["Comment"] = document.getElementById("EditNewComment").value;
-    // newData["Date"] = document.getElementById("EditNewDate").value;
-    // newData["Time"] = document.getElementById("EditNewTime").value;
-    // newData["Color"] = document.getElementById("EditNewColor").value;
-    // events.push(newData);
-    // localStorage.setItem("TodoList", JSON.stringify(events));
-    document.getElementById("EditEvent").classList.replace("bottom-0", "-bottom-56");
+  // let newData = {};
+  function EditEvent(e) {
+    e.preventDefault();
+    events.map((item) => {
+      if (item.ID === dataInput.ID) {
+        item["ID"] = dataInput.ID;
+        item["Checked"] = false;
+        item["Dot"] = "block";
+        item["Edit"] = false;
+        item["CheckMark"] = "none";
+        item["Event"] = document.getElementById("EditNewEvent").value;
+        item["Email"] = document.getElementById("EditNewEmail").value;
+        item["Comment"] = document.getElementById("EditNewComment").value;
+        item["Date"] = document.getElementById("EditNewDate").value;
+        item["Time"] = document.getElementById("EditNewTime").value;
+        item["Color"] = document.getElementById("EditNewColor").value;
+
+        setEditData(item);
+
+        // EditDataContext(item);
+        // <EditData.Consumer>
+        //   {({ editData, setEditData }) => {
+        //     setEditData(item);
+        //   }}
+        // </EditData.Consumer>;
+      }
+      localStorage.setItem("TodoList", JSON.stringify(events));
+      setEventData(events);
+      setReRender(!reRender);
+
+      document.getElementById("EditEvent").classList.replace("bottom-0", "-bottom-56");
+
+      return null;
+    });
   }
   return (
     <div id="EditEvent" className="fixed -bottom-56 w-full bg-cyan-900 h-72 flex flex-row justify-center items-start -z-10 rounded-t-3xl transition-all">
@@ -51,9 +73,9 @@ export default function EditTask({ dataInput, events }) {
           return <TextInputWithLabel {...item} key={index} />;
         })}
         <div className="flex flex-row justify-center items-center">
-          <input className="mx-2" type={"date"} defaultValue="yyyy-mm-dd" id="EditNewDate" />
-          <input className="mx-2" type={"time"} id="EditNewTime" />
-          <input className="mx-2" type={"color"} id="EditNewColor" defaultValue={"#000033"} />
+          <input className="mx-2" type={"date"} defaultValue={dataInput.Date} id="EditNewDate" />
+          <input className="mx-2" type={"time"} defaultValue={dataInput.Time} id="EditNewTime" />
+          <input className="mx-2" type={"color"} id="EditNewColor" defaultValue={dataInput.Color} />
         </div>
         <input className="mx-2 text-white font-bold" type={"submit"} />
       </form>
